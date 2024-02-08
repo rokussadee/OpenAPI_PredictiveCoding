@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "openapi-predictivecoding"
+version = "0.1.0"
+description = ""
+authors = ["rokussadee <rokus.sadee@student.ehb.be>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pandas = "^2.2.0"
+jupyter = "^1.0.0"
+ipykernel = "^6.29.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
