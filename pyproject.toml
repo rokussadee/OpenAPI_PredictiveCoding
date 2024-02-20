@@ -13,6 +13,7 @@ ipykernel = "^6.29.2"
 openai = "^1.12.0"
 python-dotenv = "^1.0.1"
 pymongo = "^4.6.1"
+ipywidgets = "^8.1.2"
 
 
 [build-system]
