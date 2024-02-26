@@ -12,5 +12,5 @@ class ChatMessage:
         """
         self.created_time: datetime = datetime.now()
         self.author: str = author
-        self.content:str = content
-        self.conversation_id:int = conversation_id
+        self.content:  str = content
+        self.conversation_id: int = conversation_id

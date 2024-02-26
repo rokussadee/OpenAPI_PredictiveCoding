@@ -16,6 +16,7 @@ pymongo = "^4.6.1"
 ipywidgets = "^8.1.2"
 mystmd = "^1.1.42"
 sphinx-togglebutton = "^0.3.2"
+email-validator = "^2.1.0.post1"
 
 
 [build-system]
