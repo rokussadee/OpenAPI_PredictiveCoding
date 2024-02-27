@@ -29,6 +29,14 @@ class Conversation:
         self.conversation_topics: List[str] = conversation_topics if conversation_topics is not None else default_topic
 
     def save(self, client: MongoClient) -> ObjectId:
+
+        """
+        Saves a created Conversation instance into the MongoDB database.
+        Raises a PyMongoError if the record could not be inserted into the database.
+
+        :param client: The MongoDB client.
+        :return: The MongoDB ObjectId of the saved conversation.
+        """
         try:
             db = client[os.getenv("DATABASE")]
             col = db["conversations"]
