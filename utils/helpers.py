@@ -7,6 +7,9 @@ def validate_email_address(email_address: str) -> str:
     """
     Validates an email address using the email_validator library.
     Raises EmailNotValidError if the email address is invalid.
+
+    :param email_address: The email address to validate.
+    :return: A string representing the email address validated and normalized by the email_validator library.
     """
     try:
         email_object = validate_email(email_address)
@@ -16,6 +19,16 @@ def validate_email_address(email_address: str) -> str:
 
 
 def validate_password(password: str) -> str:
+    """
+    Validates the password based on the following criteria:
+    - At least 8 characters long
+    - Contains at least one uppercase letter
+    - Contains at least one lowercase letter
+    - Contains at least one digit
+
+    :param password: The password to validate.
+    :return: A string representing the password validated using the password validator_library.
+    """
     schema = PasswordValidator()
     schema \
         .min(8) \
@@ -33,11 +46,24 @@ def validate_password(password: str) -> str:
 
 
 def encrypt_password(password: str) -> bytes:
+    """
+    Encrypts the provided password using the bcrypt library's "hashpw" method.
+
+    :param password: The password to be encrypted using the bcrypt library.
+    :return: A sequence of bytes representing the hashed password encrypted using the bcrypt library.
+    """
     password = password.encode('utf-8')
     hashed = bcrypt.hashpw(password, bcrypt.gensalt())
     return hashed
 
 
 def check_password(hashed_password: bytes, stored_password: bytes) -> bool:
+    """
+    Compares the provided hashed password with the corresponding user's password that was saved in the MongoDB database.
+
+    :param hashed_password: A sequence of bytes representing the hashed password attempt that was provided by the user.
+    :param stored_password: A sequence of bytes representing the hash of the stored password belonging to the user.
+    :return: A boolean representing the result of the password comparison.
+    """
     is_same = bcrypt.checkpw(stored_password, hashed_password)
     return is_same
