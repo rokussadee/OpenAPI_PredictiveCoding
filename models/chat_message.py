@@ -10,7 +10,7 @@ class ChatMessage:
         :param content: The content of the message.
         :param conversation_id: The ID of the chat room to which the message belongs (foreign key to ChatRoom).
         """
-        self.created_time: datetime = datetime.now()
+        self.created_at: datetime = datetime.now()
         self.author: str = author
         self.content:  str = content
         self.conversation_id: int = conversation_id

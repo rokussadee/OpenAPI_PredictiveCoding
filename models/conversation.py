@@ -11,14 +11,11 @@ class Conversation:
                  user_login_count: int = 0,
                  conversation_topics: List[str] = None):
         """
-        Represents a chat room.
 
-        :param user_uid: The uuid of the user.
-        :param user_message_count: The count of user messages.
         :param user_login_count: The count of user logins.
         :param conversation_topics: List of conversation topics.
         """
-        self.created_time: datetime = datetime.now()
+        self.created_at: datetime = datetime.now()
         self.user_uid: uuid.UUID = user_uid
         self.user_message_count: int = user_message_count
         self.user_login_count: int = user_login_count
