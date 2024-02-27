@@ -56,11 +56,11 @@ class User:
 
     def save(self, client: MongoClient) -> ObjectId:
         """
-        Saves the user into the MongoDB database.
+        Saves a created User instance into the MongoDB database.
         Raises a PyMongoError if the record could not be inserted into the database.
 
         :param client: The MongoDB client.
-        :return: The inserted record as a dict.
+        :return: The MongoDB ObjectId of the saved user.
         """
         try:
             db = client[os.getenv("DATABASE")]
