@@ -11,7 +11,10 @@ class Conversation:
                  user_login_count: int = 0,
                  conversation_topics: List[str] = None):
         """
+        Represents a conversation.
 
+        :param user_uid: The UUID of the user that has initiated this conversation.
+        :param user_message_count: The count of messages sent by the user in this conversation (excluding bot messages).
         :param user_login_count: The count of user logins.
         :param conversation_topics: List of conversation topics.
         """
