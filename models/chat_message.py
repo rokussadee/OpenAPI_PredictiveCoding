@@ -19,6 +19,13 @@ class ChatMessage:
         self.conversation_id: ObjectId = conversation_id
 
     def save(self, client: MongoClient) -> ObjectId:
+        """
+        Saves a created ChatMessage instance into the MongoDB database.
+        Raises a PyMongoError if the record could not be inserted into the database.
+
+        :param client: The MongoDB client.
+        :return: The MongoDB ObjectId of the saved chat_message.
+        """
         try:
             db = client[os.getenv("DATABASE")]
             col = db["chat_messages"]
