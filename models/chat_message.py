@@ -1,8 +1,11 @@
 from datetime import datetime
+from pymongo import MongoClient, errors
+import os
+from bson.objectid import ObjectId
 
 
 class ChatMessage:
-    def __init__(self, author: str, content: str, conversation_id: int):
+    def __init__(self, author: str, content: str, conversation_id: ObjectId):
         """
         Represents a message in a chat room.
 
@@ -13,4 +16,15 @@ class ChatMessage:
         self.created_at: datetime = datetime.now()
         self.author: str = author
         self.content:  str = content
-        self.conversation_id: int = conversation_id
+        self.conversation_id: ObjectId = conversation_id
+
+    def save(self, client: MongoClient) -> ObjectId:
+        try:
+            db = client[os.getenv("DATABASE")]
+            col = db["chat_messages"]
+            query_result = col.insert_one(self.__dict__)
+            print(query_result)
+            inserted_id = query_result.inserted_id
+            return inserted_id
+        except Exception as e:
+            raise errors.PyMongoError(str(e))
