@@ -16,7 +16,7 @@ def mongo_client() -> MongoClient:
     db_cluster = os.getenv("DB_CLUSTER")
     db_options = os.getenv("DB_OPTIONS")
 
-    if os.getenv("DB_ENV") == "local":
+    if os.getenv("DB_ENV") == "development":
         print(f"\n\nlocal database\n\n")
         db_client = MongoClient('localhost', 27017, uuidRepresentation='standard')
     else:
