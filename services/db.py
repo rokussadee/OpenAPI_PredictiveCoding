@@ -11,19 +11,24 @@ load_dotenv()
 
 
 def mongo_client() -> MongoClient:
-    mongo_user = os.getenv("MONGO_USER")
-    mongo_pw = urllib.parse.quote_plus(os.getenv("MONGO_PASSWORD"))
-    mongo_host = os.getenv("MONGO_HOST")
-    mongo_port = os.getenv("MONGO_PORT")
-    database = os.getenv("DATABASE")
-    uri = (f'mongodb+srv://{mongo_user}:{mongo_pw}'
-           f'@cluster.vfkvijy.mongodb.net/'
-           f'?retryWrites=true'
-           f'&w=majority'
-           f'&appName=Cluster'
-           f'&tlsCAFile=../isrgrootx1.pem')
-    try:
+    db_user = os.getenv("DB_USER")
+    db_pw = urllib.parse.quote_plus(os.getenv("DB_PASSWORD"))
+    db_cluster = os.getenv("DB_CLUSTER")
+    db_options = os.getenv("DB_OPTIONS")
+
+    if os.getenv("DB_ENV") == "local":
+        print(f"\n\nlocal database\n\n")
+        db_client = MongoClient('localhost', 27017, uuidRepresentation='standard')
+    else:
+        print(f"\n\nremote database\n\n")
+        uri = (f'mongodb+srv://{db_user}:{db_pw}'
+               f'@{db_cluster}/'
+               f'{db_options}')
+        print(uri)
         db_client = MongoClient(uri, server_api=ServerApi('1'), uuidRepresentation='standard')
+
+    try:
+        db_client = db_client
         print(db_client)
         print(db_client.list_databases())
         return db_client
@@ -50,3 +55,8 @@ def set_collection(db: database, col_name: str) -> collection:
     col = db[col_name]
     print(col)
     return col
+
+
+def close_client(client: MongoClient):
+    print(f"\nClosing MongoDB Client\n")
+    client.close()
