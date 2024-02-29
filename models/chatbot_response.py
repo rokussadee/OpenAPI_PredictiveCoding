@@ -7,7 +7,6 @@ from bson.objectid import ObjectId
 class ChatbotResponse:
     def __init__(self,
                  content: str,
-                 created_at: datetime,
                  conversation_id: ObjectId,
                  response_to_id: ObjectId):
         self.content: str = content
