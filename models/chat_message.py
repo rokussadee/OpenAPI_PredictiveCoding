@@ -5,16 +5,16 @@ from bson.objectid import ObjectId
 
 
 class ChatMessage:
-    def __init__(self, author: str, content: str, conversation_id: ObjectId):
+    def __init__(self, user_id: ObjectId, content: str, conversation_id: ObjectId):
         """
         Represents a message in a chat room.
 
-        :param author: The author of the message.
+        :param user_id: The user_id of the user the message belongs to.
         :param content: The content of the message.
         :param conversation_id: The ID of the chat room to which the message belongs (foreign key to ChatRoom).
         """
         self.created_at: datetime = datetime.now()
-        self.author: str = author
+        self.user_id: ObjectId = user_id
         self.content:  str = content
         self.conversation_id: ObjectId = conversation_id
 
