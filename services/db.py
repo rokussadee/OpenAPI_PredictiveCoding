@@ -1,8 +1,6 @@
-import pymongo
 from pymongo.mongo_client import MongoClient
 from pymongo.errors import OperationFailure
-from pymongo import collection
-from pymongo import database
+from pymongo import database, collection
 from pymongo.server_api import ServerApi
 from IPython.display import display_html, HTML
 import os
@@ -13,6 +11,11 @@ load_dotenv()
 
 
 def mongo_client() -> MongoClient:
+    """
+    Initializes and returns a MongoClient instance for connecting to the MongoDB database.
+
+    :returns: A MongoClient instance.
+    """
     db_user = os.getenv("DB_USER")
     db_pw = urllib.parse.quote_plus(os.getenv("DB_PASSWORD"))
     db_cluster = os.getenv("DB_CLUSTER")
@@ -57,7 +60,12 @@ def mongo_client() -> MongoClient:
 
 
 def ping_client(client: MongoClient):
-    # Send a ping to confirm a successful connection
+    """
+    Sends a ping command to the MongoDB client to confirm a successful connection.
+
+    :param client: A MongoClient instance representing the MongoDB client.
+    """
+
     try:
         client.admin.command('ping')
         print("Pinged your deployment. You successfully connected to MongoDB!")
@@ -66,17 +74,36 @@ def ping_client(client: MongoClient):
 
 
 def set_db(client: MongoClient, db_name: str) -> database:
+    """
+    Sets the MongoDB database to be used.
+
+    :param client: A MongoClient instance representing the MongoDB client.
+    :param db_name: The name of the database to set.
+    :returns: A pymongo.database.Database instance representing the selected database.
+    """
     db = client[db_name]
     print(db)
     return db
 
 
 def set_collection(db: database, col_name: str) -> collection:
+    """
+    Sets the MongoDB collection to be used within the selected database.
+
+    :param db: A pymongo.database.Database instance representing the selected database.
+    :param col_name: The name of the collection to set.
+    :returns: A pymongo.collection.Collection instance representing the selected collection.
+    """
     col = db[col_name]
     print(col)
     return col
 
 
 def close_client(client: MongoClient):
+    """
+    Closes the MongoDB client connection.
+
+    :param client: A MongoClient instance representing the MongoDB client.
+    """
     print(f"\nClosing MongoDB Client\n")
     client.close()
