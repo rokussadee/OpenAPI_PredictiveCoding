@@ -10,7 +10,7 @@ default_topic = ["New conversation topic"]
 
 class Conversation:
     def __init__(self,
-                 user_uid: str,
+                 user_uid: ObjectId,
                  user_message_count: int = 0,
                  user_login_count: int = 0,
                  conversation_topics: List[str] = None):
@@ -23,7 +23,7 @@ class Conversation:
         :param conversation_topics: List of conversation topics.
         """
         self.created_at: datetime = datetime.now()
-        self.user_uid: uuid.UUID = uuid.UUID(user_uid)
+        self.user_uid: ObjectId = user_uid
         self.user_message_count: int = user_message_count
         self.user_login_count: int = user_login_count
         self.conversation_topics: List[str] = conversation_topics if conversation_topics is not None else default_topic

@@ -5,7 +5,6 @@ from pymongo import MongoClient, errors
 
 class Expectation:
     def __init__(self,
-
                  reasoning: str,
                  user_predictions: List[str],
                  additional_data: List[str]):
