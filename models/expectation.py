@@ -19,5 +19,8 @@ def create_expectation(reasoning: str, user_predictions: List[str], additional_d
     :param additional_data: Additional data related to the expectation.
     :return: A dictionary containing expectation data.
     """
-    return {"reasoning": reasoning, "user_predictions": user_predictions, "additional_data": additional_data}
+    return {"created_at": datetime.now(),
+            "reasoning": reasoning,
+            "user_predictions": user_predictions,
+            "additional_data": additional_data}
 

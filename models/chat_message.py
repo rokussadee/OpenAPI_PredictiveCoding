@@ -1,6 +1,4 @@
 from datetime import datetime
-from pymongo import MongoClient, errors
-import os
 from bson.objectid import ObjectId
 from dataclasses import dataclass
 
@@ -21,4 +19,7 @@ def create_chat_message(user_id: ObjectId, content: str, conversation_id: Object
     :param conversation_id: The ObjectId of the conversation.
     :return: A dictionary containing chat message data.
     """
-    return {"user_id": user_id, "content": content, "conversation_id": conversation_id}
+    return {"created_at": datetime.now(),
+            "user_id": user_id,
+            "content": content,
+            "conversation_id": conversation_id}

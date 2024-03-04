@@ -19,5 +19,8 @@ def create_violation(last_llm_response_id: ObjectId, expectation_id: ObjectId, v
     :param voe_thought: The content of the violation.
     :return: A dictionary containing violation data.
     """
-    return {"last_llm_response_id": last_llm_response_id, "expectation_id": expectation_id, "voe_thought": voe_thought}
+    return {"created_at": datetime.now(),
+            "last_llm_response_id": last_llm_response_id,
+            "expectation_id": expectation_id,
+            "voe_thought": voe_thought}
 

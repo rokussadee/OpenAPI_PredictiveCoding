@@ -55,4 +55,6 @@ def create_user_data(email: str, password: str) -> dict:
     validated_password = validate_password(password)
     validated_email = validate_email(email)
 
-    return {"email": validated_email, "password": validated_password}
+    return {"created_at": datetime.now(),
+            "email": validated_email,
+            "password": validated_password}

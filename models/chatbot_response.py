@@ -20,4 +20,7 @@ def create_chatbot_response(content: str, conversation_id: ObjectId, response_to
     :param response_to_id: The ObjectId of the response to which this response is replying.
     :return: A dictionary containing chatbot response data.
     """
-    return {"content": content, "conversation_id": conversation_id, "response_to_id": response_to_id}
+    return {"created_at": datetime.now(),
+            "content": content,
+            "conversation_id": conversation_id,
+            "response_to_id": response_to_id}

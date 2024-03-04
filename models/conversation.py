@@ -28,4 +28,8 @@ def create_conversation(user_uid: ObjectId, user_message_count: int = 0, user_lo
     """
     if conversation_topics is None:
         conversation_topics = []
-    return {"user_uid": user_uid, "user_message_count": user_message_count, "user_login_count": user_login_count, "conversation_topics": conversation_topics}
+    return {"created_at": datetime.now(),
+            "user_uid": user_uid,
+            "user_message_count": user_message_count,
+            "user_login_count": user_login_count,
+            "conversation_topics": conversation_topics}
