@@ -1,6 +1,7 @@
 from typing import List
 from datetime import datetime
 from bson.objectid import ObjectId
+from dataclasses import dataclass
 
 
 @dataclass

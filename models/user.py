@@ -41,7 +41,7 @@ def validate_password(password: str) -> bytes:
         raise ValueError(f"Invalid password: {str(e)}")
 
 
-def create_user_data(email: str, password: str) -> dict:
+def create_user(email: str, password: str) -> dict:
     """
     Creates a dictionary containing user data.
 

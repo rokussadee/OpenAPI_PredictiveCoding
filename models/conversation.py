@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import List
 from bson.objectid import ObjectId
+from dataclasses import dataclass
 
 default_topic = ["New conversation topic"]
 
