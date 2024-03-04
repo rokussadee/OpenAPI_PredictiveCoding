@@ -8,7 +8,7 @@ from models.violation import ViolationData
 from models.expectation import ExpectationData
 from models.expectation_revision import ExpectationRevisionData
 from models.chatbot_response import ChatbotResponseData
-from typing import Dict, Type
+from typing import Dict, Type, Any
 
 COLLECTION_DATA_CLASS_MAP: Dict[str, Type] = {
     'users': UserData,
@@ -48,7 +48,7 @@ def create_model(collection_name: str, model_data: dict, client: MongoClient) ->
         raise errors.PyMongoError(str(e))
 
 
-def get_model(collection_name: str, model_id: ObjectId, client: MongoClient) -> dict:
+def get_model(collection_name: str, model_id: ObjectId, client: MongoClient) -> Type:
     """
     Retrieves a model instance from the specified collection in the MongoDB database.
 
@@ -65,11 +65,16 @@ def get_model(collection_name: str, model_id: ObjectId, client: MongoClient) -> 
     try:
         db = client[os.getenv("DATABASE")]
         col = db[collection_name]
-        model = col.find_one({"_id": ObjectId(model_id)})
-        if not isinstance(model.__dict__, data_class):
+        query_result = col.find_one({"_id": ObjectId(model_id)})
+        if query_result is None:
+            raise ValueError("No document found with the specified model_id")
+        document = dict(query_result.items())
+        document.pop('_id', None)
+        cast_model = data_class(**document)
+        if not isinstance(cast_model, data_class):
             raise ValueError(f"model_data must be of type {data_class.__name__}")
 
-        return model
+        return cast_model
     except Exception as e:
         raise errors.PyMongoError(str(e))
 
