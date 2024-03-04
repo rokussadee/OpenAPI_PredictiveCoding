@@ -1296,13 +1296,13 @@ test = ["flaky", "ipykernel (>=6.19.3)", "ipython", "ipywidgets", "nbconvert (>=
 
 [[package]]
 name = "nbconvert"
-version = "7.16.1"
+version = "7.16.2"
 description = "Converting Jupyter Notebooks (.ipynb files) to other formats.  Output formats include asciidoc, html, latex, markdown, pdf, py, rst, script.  nbconvert can be used both as a Python library (`import nbconvert`) or as a command line tool (invoked as `jupyter nbconvert ...`)."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "nbconvert-7.16.1-py3-none-any.whl", hash = "sha256:3188727dffadfdc9c6a1c7250729063d7bc78b355ad7aa023138afa030d1cd07"},
-    {file = "nbconvert-7.16.1.tar.gz", hash = "sha256:e79e6a074f49ba3ed29428ed86487bf51509d9aab613bd8522ac08f6d28fd7fd"},
+    {file = "nbconvert-7.16.2-py3-none-any.whl", hash = "sha256:0c01c23981a8de0220255706822c40b751438e32467d6a686e26be08ba784382"},
+    {file = "nbconvert-7.16.2.tar.gz", hash = "sha256:8310edd41e1c43947e4ecf16614c61469ebc024898eb808cce0999860fc9fb16"},
 ]
 
 [package.dependencies]
@@ -1362,6 +1362,20 @@ files = [
     {file = "nbimporter-0.3.4-py3-none-any.whl", hash = "sha256:14a4c37fd4a3e18ad5fba726d54f2e46b483dfe31c1f036682bb9ef259ab67a3"},
     {file = "nbimporter-0.3.4.tar.gz", hash = "sha256:bc9bc803e7ba44ae9f7c6ec60cae2f4d1d509508feedd8c9e03a7949333bf16e"},
 ]
+
+[[package]]
+name = "nbstripout"
+version = "0.7.1"
+description = "Strips outputs from Jupyter and IPython notebooks"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "nbstripout-0.7.1-py2.py3-none-any.whl", hash = "sha256:dfb0688b42b02ff13925e583313fc009c87342ad13b79ae0329357749aa6ed0c"},
+    {file = "nbstripout-0.7.1.tar.gz", hash = "sha256:2aad3454dc13e356f2fc94917856bc44f2bed3add77e8ba9f3a78003074bcd84"},
+]
+
+[package.dependencies]
+nbformat = "*"
 
 [[package]]
 name = "nest-asyncio"
@@ -1461,13 +1475,13 @@ files = [
 
 [[package]]
 name = "openai"
-version = "1.12.0"
+version = "1.13.3"
 description = "The official Python library for the openai API"
 optional = false
 python-versions = ">=3.7.1"
 files = [
-    {file = "openai-1.12.0-py3-none-any.whl", hash = "sha256:a54002c814e05222e413664f651b5916714e4700d041d5cf5724d3ae1a3e3481"},
-    {file = "openai-1.12.0.tar.gz", hash = "sha256:99c5d257d09ea6533d689d1cc77caa0ac679fa21efef8893d8b0832a86877f1b"},
+    {file = "openai-1.13.3-py3-none-any.whl", hash = "sha256:5769b62abd02f350a8dd1a3a242d8972c947860654466171d60fb0972ae0a41c"},
+    {file = "openai-1.13.3.tar.gz", hash = "sha256:ff6c6b3bc7327e715e4b3592a923a5a1c7519ff5dd764a83d69f633d49e77a7b"},
 ]
 
 [package.dependencies]
@@ -2905,4 +2919,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "cef5f275d26f2abc23be11c1447a3d8a4afe4d0a04c2f436173012e88398145e"
+content-hash = "736364074a6550d9563227c7052643211fadf8a5bab4b8dc40482a277ead85e4"
