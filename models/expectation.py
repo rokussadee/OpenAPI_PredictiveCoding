@@ -1,10 +1,10 @@
+from datetime import datetime
 from typing import List
-from bson.objectid import ObjectId
-from pymongo import MongoClient, errors
 
 
 @dataclass
 class ExpectationData:
+    created_at: datetime
     reasoning: str
     user_predictions: List[str]
     additional_data: List[str]

@@ -1,10 +1,11 @@
 from typing import List
-from pymongo import MongoClient, errors
+from datetime import datetime
 from bson.objectid import ObjectId
 
 
 @dataclass
 class ExpectationRevisionData:
+    created_at: datetime
     revised_input_possibilities: List[str]
     prediction_error: float
     initial_expectation_id: ObjectId

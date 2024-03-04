@@ -1,11 +1,10 @@
 from datetime import datetime
-from pymongo import MongoClient, errors
-import os
 from bson.objectid import ObjectId
 
 
 @dataclass
 class ChatbotResponseData:
+    created_at: datetime
     content: str
     conversation_id: ObjectId
     response_to_id: ObjectId

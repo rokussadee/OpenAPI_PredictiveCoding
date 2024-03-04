@@ -1,8 +1,4 @@
 from datetime import datetime
-from pymongo import collection, MongoClient, errors
-from bson.objectid import ObjectId
-import uuid
-import os
 from dotenv import load_dotenv
 import utils.helpers as helpers
 from dataclasses import dataclass
@@ -12,6 +8,7 @@ load_dotenv()
 
 @dataclass
 class UserData:
+    created_at: datetime
     email: str
     password: str
 

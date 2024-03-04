@@ -1,10 +1,10 @@
-from typing import List
-from pymongo import MongoClient, errors
+from datetime import datetime
 from bson.objectid import ObjectId
 
 
 @dataclass
 class ViolationData:
+    created_at: datetime
     last_llm_response_id: ObjectId
     expectation_id: ObjectId
     voe_thought: str

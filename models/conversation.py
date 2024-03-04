@@ -1,15 +1,13 @@
 from datetime import datetime
 from typing import List
-from pymongo import MongoClient, errors
-import os
 from bson.objectid import ObjectId
-import uuid
 
 default_topic = ["New conversation topic"]
 
 
 @dataclass
 class ConversationData:
+    created_at: datetime
     user_uid: ObjectId
     user_message_count: int = 0
     user_login_count: int = 0

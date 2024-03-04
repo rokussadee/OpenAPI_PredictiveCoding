@@ -5,6 +5,7 @@ from dataclasses import dataclass
 
 @dataclass
 class ChatMessageData:
+    created_at: datetime
     user_id: ObjectId
     content: str
     conversation_id: ObjectId
