@@ -108,6 +108,10 @@ def delete_model(collection_name: str, model_id: ObjectId, client: MongoClient) 
     :param model_id: The ObjectId of the model to delete.
     :param client: The MongoDB client.
     """
+
+    if collection_name not in COLLECTION_DATA_CLASS_MAP:
+        raise ValueError(f"No data class defined for collection: {collection_name}")
+
     try:
         db = client[os.getenv("DATABASE")]
         col = db[collection_name]
