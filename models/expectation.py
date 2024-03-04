@@ -11,7 +11,7 @@ class ExpectationData:
     additional_data: List[str]
 
 
-def create_expectation(reasoning: str, user_predictions: List[str], additional_data: List[str]) -> dict:
+def create_expectation(reasoning: str, user_predictions: List[str], additional_data: List[str]) -> ExpectationData:
     """
     Creates a dictionary containing expectation data.
 
@@ -20,8 +20,10 @@ def create_expectation(reasoning: str, user_predictions: List[str], additional_d
     :param additional_data: Additional data related to the expectation.
     :return: A dictionary containing expectation data.
     """
-    return {"created_at": datetime.now(),
-            "reasoning": reasoning,
-            "user_predictions": user_predictions,
-            "additional_data": additional_data}
+    return ExpectationData(
+        datetime.now(),
+        reasoning,
+        user_predictions,
+        additional_data
+    )
 

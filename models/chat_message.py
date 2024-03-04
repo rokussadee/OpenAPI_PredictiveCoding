@@ -11,7 +11,7 @@ class ChatMessageData:
     conversation_id: ObjectId
 
 
-def create_chat_message(user_id: ObjectId, content: str, conversation_id: ObjectId) -> dict:
+def create_chat_message(user_id: ObjectId, content: str, conversation_id: ObjectId) -> ChatMessageData:
     """
     Creates a dictionary containing chat message data.
 
@@ -20,7 +20,9 @@ def create_chat_message(user_id: ObjectId, content: str, conversation_id: Object
     :param conversation_id: The ObjectId of the conversation.
     :return: A dictionary containing chat message data.
     """
-    return {"created_at": datetime.now(),
-            "user_id": user_id,
-            "content": content,
-            "conversation_id": conversation_id}
+    return ChatMessageData(
+        datetime.now(),
+        user_id,
+        content,
+        conversation_id
+    )

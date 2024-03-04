@@ -12,7 +12,7 @@ class ViolationData:
     voe_thought: str
 
 
-def create_violation(last_llm_response_id: Optional[ObjectId], expectation_id: ObjectId, voe_thought: str) -> dict:
+def create_violation(last_llm_response_id: Optional[ObjectId], expectation_id: ObjectId, voe_thought: str) -> ViolationData:
     """
     Creates a dictionary containing violation data.
 
@@ -21,8 +21,10 @@ def create_violation(last_llm_response_id: Optional[ObjectId], expectation_id: O
     :param voe_thought: The content of the violation.
     :return: A dictionary containing violation data.
     """
-    return {"created_at": datetime.now(),
-            "last_llm_response_id": last_llm_response_id,
-            "expectation_id": expectation_id,
-            "voe_thought": voe_thought}
+    return ViolationData(
+        datetime.now(),
+        last_llm_response_id,
+        expectation_id,
+        voe_thought
+    )
 

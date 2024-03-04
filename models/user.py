@@ -10,7 +10,7 @@ load_dotenv()
 class UserData:
     created_at: datetime
     email: str
-    password: str
+    password: bytes
 
 
 def validate_email(email: str) -> str:
@@ -41,7 +41,7 @@ def validate_password(password: str) -> bytes:
         raise ValueError(f"Invalid password: {str(e)}")
 
 
-def create_user(email: str, password: str) -> dict:
+def create_user(email: str, password: str) -> UserData:
     """
     Creates a dictionary containing user data.
 
@@ -52,6 +52,8 @@ def create_user(email: str, password: str) -> dict:
     validated_password = validate_password(password)
     validated_email = validate_email(email)
 
-    return {"created_at": datetime.now(),
-            "email": validated_email,
-            "password": validated_password}
+    return UserData(
+        datetime.now(),
+        validated_email,
+        validated_password
+    )

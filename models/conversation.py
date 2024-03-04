@@ -15,7 +15,7 @@ class ConversationData:
     conversation_topics: List[str] = None
 
 
-def create_conversation(user_uid: ObjectId, user_message_count: int = 0, user_login_count: int = 0, conversation_topics: List[str] = None) -> dict:
+def create_conversation(user_uid: ObjectId, user_message_count: int = 0, user_login_count: int = 0, conversation_topics: List[str] = None) -> ConversationData:
     """
     Creates a dictionary containing conversation data.
 
@@ -27,8 +27,10 @@ def create_conversation(user_uid: ObjectId, user_message_count: int = 0, user_lo
     """
     if conversation_topics is None:
         conversation_topics = []
-    return {"created_at": datetime.now(),
-            "user_uid": user_uid,
-            "user_message_count": user_message_count,
-            "user_login_count": user_login_count,
-            "conversation_topics": conversation_topics}
+    return ConversationData(
+        datetime.now(),
+        user_uid,
+        user_message_count,
+        user_login_count,
+        conversation_topics
+    )

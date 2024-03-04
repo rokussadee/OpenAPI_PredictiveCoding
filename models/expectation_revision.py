@@ -14,7 +14,7 @@ class ExpectationRevisionData:
 
 def create_expectation_revision(revised_input_possibilities: List[str],
                                 prediction_error: float,
-                                initial_expectation_id: ObjectId) -> dict:
+                                initial_expectation_id: ObjectId) -> ExpectationRevisionData:
     """
     Creates a dictionary containing expectation revision data.
 
@@ -23,8 +23,10 @@ def create_expectation_revision(revised_input_possibilities: List[str],
     :param initial_expectation_id: The ObjectId of the initial expectation object.
     :return: A dictionary containing expectation revision data.
     """
-    return {"created_at": datetime.now(),
-            "revised_input_possibilities": revised_input_possibilities,
-            "prediction_error": prediction_error,
-            "initial_expectation_id": initial_expectation_id}
+    return ExpectationRevisionData(
+        datetime.now(),
+        revised_input_possibilities,
+        prediction_error,
+        initial_expectation_id
+    )
 

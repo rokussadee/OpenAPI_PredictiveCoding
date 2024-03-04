@@ -21,10 +21,13 @@ def mongo_client() -> MongoClient:
     db_cluster = os.getenv("DB_CLUSTER")
     db_options = os.getenv("DB_OPTIONS")
 
+    print(f'Username: {db_user}, Password: {db_pw}')
+
     if os.getenv("DB_ENV") == "development":
         print(f"\nConnected using a local database\n")
         # db_client = MongoClient(f'admin:{db_pw}localhost', 27017, uuidRepresentation='standard')
         db_client = MongoClient( f"mongodb://{db_user}:{db_pw}@localhost:27017/")
+        print(f"mongodb://{db_user}:{db_pw}@localhost:27017/")
     else:
         print(f"\nConnected using a remote database\n")
         uri = (f'mongodb+srv://{db_user}:{db_pw}'
