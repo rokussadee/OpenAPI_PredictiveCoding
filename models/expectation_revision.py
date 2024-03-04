@@ -3,35 +3,24 @@ from pymongo import MongoClient, errors
 from bson.objectid import ObjectId
 
 
-class ExpectationRevision:
-    def __init__(self,
-                 revised_input_possibilities: List[str],
-                 prediction_error: float,
-                 initial_expectation_id: ObjectId):
-        """
-        Represents an expectation revision object.
+@dataclass
+class ExpectationRevisionData:
+    revised_input_possibilities: List[str]
+    prediction_error: float
+    initial_expectation_id: ObjectId
 
-        :param revised_input_possibilities: The revised input possibilities.
-        :param prediction_error: The prediction error.
-        :param initial_expectation_id: The ObjectId of the initial expectation object.
-        """
-        self.revised_input_possibilities: List[str] = revised_input_possibilities
-        self.prediction_error: float= prediction_error
-        self.initial_expectation_id: ObjectId = initial_expectation_id
 
-    def save(self, client: MongoClient) -> ObjectId:
-        """
-        Saves a created ExpectationRevision instance into the MongoDB database.
-        Raises a PyMongoError if the record could not be inserted into the database.
+def create_expectation_revision(revised_input_possibilities: List[str],
+                                prediction_error: float,
+                                initial_expectation_id: ObjectId) -> dict:
+    """
+    Creates a dictionary containing expectation revision data.
 
-        :param client: The MongoDB client.
-        :return: The MongoDB ObjectId of the saved expectation revision.
-        """
-        try:
-            db = client[os.getenv("DATABASE")]
-            col = db["expectation_revisions"]
-            query_result = col.insert_one(self.__dict__)
-            inserted_id = query_result.inserted_id
-            return inserted_id
-        except Exception as e:
-            raise errors.PyMongoError(str(e))
+    :param revised_input_possibilities: The revised input possibilities.
+    :param prediction_error: The prediction error.
+    :param initial_expectation_id: The ObjectId of the initial expectation object.
+    :return: A dictionary containing expectation revision data.
+    """
+    return {"revised_input_possibilities": revised_input_possibilities, "prediction_error": prediction_error,
+            "initial_expectation_id": initial_expectation_id}
+

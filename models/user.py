@@ -5,8 +5,15 @@ import uuid
 import os
 from dotenv import load_dotenv
 import utils.helpers as helpers
+from dataclasses import dataclass
 
 load_dotenv()
+
+
+@dataclass
+class UserData:
+    email: str
+    password: str
 
 
 def validate_email(email: str) -> str:
@@ -37,37 +44,15 @@ def validate_password(password: str) -> bytes:
         raise ValueError(f"Invalid password: {str(e)}")
 
 
-class User:
-    def __init__(self,
-                 uid: uuid.UUID = uuid.uuid4(),
-                 email: str = None,
-                 password: str = None):
-        """
-        Represents a user
+def create_user_data(email: str, password: str) -> dict:
+    """
+    Creates a dictionary containing user data.
 
-        :param uid: The UUID of the user.
-        :param email: The email address of the user.
-        :param password: A sequence of bytes representing the password of the user.
-        """
-        self.uid: uuid.UUID = uid
-        self.created_at: datetime = datetime.now()
-        self.email: str = validate_email(email)
-        self.password: bytes = validate_password(password)
+    :param email: The email address of the user.
+    :param password: The password of the user.
+    :return: A dictionary containing user data if the password is valid, otherwise None.
+    """
+    validated_password = validate_password(password)
+    validated_email = validate_email(email)
 
-    def save(self, client: MongoClient) -> ObjectId:
-        """
-        Saves a created User instance into the MongoDB database.
-        Raises a PyMongoError if the record could not be inserted into the database.
-
-        :param client: The MongoDB client.
-        :return: The MongoDB ObjectId of the saved user.
-        """
-        try:
-            db = client[os.getenv("DATABASE")]
-            col = db["users"]
-            query_result = col.insert_one(self.__dict__)
-            print(query_result)
-            inserted_id = query_result.inserted_id
-            return inserted_id
-        except Exception as e:
-            raise errors.PyMongoError(str(e))
+    return {"email": validated_email, "password": validated_password}
