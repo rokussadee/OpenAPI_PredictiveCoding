@@ -48,7 +48,7 @@ def create_model(collection_name: str, model_data: dict, client: MongoClient) ->
         raise errors.PyMongoError(str(e))
 
 
-def get_model(collection_name: str, model_id: ObjectId, client: MongoClient) -> Type:
+def get_model(collection_name: str, model_id: ObjectId, client: MongoClient) -> dict:
     """
     Retrieves a model instance from the specified collection in the MongoDB database.
 
@@ -69,12 +69,16 @@ def get_model(collection_name: str, model_id: ObjectId, client: MongoClient) -> 
         if query_result is None:
             raise ValueError("No document found with the specified model_id")
         document = dict(query_result.items())
+        document_id = document['_id']
         document.pop('_id', None)
         cast_model = data_class(**document)
         if not isinstance(cast_model, data_class):
             raise ValueError(f"model_data must be of type {data_class.__name__}")
 
-        return cast_model
+        return {
+            '_id': document_id,
+            'model': cast_model
+        }
     except Exception as e:
         raise errors.PyMongoError(str(e))
 
