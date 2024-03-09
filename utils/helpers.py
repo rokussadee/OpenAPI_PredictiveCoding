@@ -1,6 +1,12 @@
 from email_validator import validate_email, EmailNotValidError
 from password_validator import PasswordValidator
+from ipywidgets import Output as BaseOutput
 import bcrypt
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+DEBUG_MODE = (os.getenv("DEBUG_MODE") == 'true')
 
 
 def validate_email_address(email_address: str) -> str:
@@ -36,7 +42,7 @@ def validate_password(password: str) -> str:
         .has().uppercase() \
         .has().lowercase() \
         .has().digits() \
-        .has().no().spaces()\
+        .has().no().spaces() \
 
     try:
         schema.validate(password)
@@ -67,3 +73,15 @@ def check_password(hashed_password: bytes, stored_password: bytes) -> bool:
     """
     is_same = bcrypt.checkpw(stored_password, hashed_password)
     return is_same
+
+
+class CustomOutput(BaseOutput):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def append_stdout(self, text, debug=False):
+        if debug and not DEBUG_MODE:
+            return
+        if debug:
+            text = "[DEBUG] " + text
+        super().append_stdout(text)
