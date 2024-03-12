@@ -1,6 +1,7 @@
 from email_validator import validate_email, EmailNotValidError
 from password_validator import PasswordValidator
 from ipywidgets import Output as BaseOutput
+from IPython.display import HTML
 import bcrypt
 import os
 from dotenv import load_dotenv
@@ -79,9 +80,12 @@ class CustomOutput(BaseOutput):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-    def append_stdout(self, text, debug=False):
+    def append_stdout(self, text, debug=False, stream=False):
         if debug and not DEBUG_MODE:
             return
         if debug:
-            text = "[DEBUG] " + text
+            text = f"[DEBUG] {text}"
         super().append_stdout(text)
+        if not stream:
+            super().append_stdout(f"\n\n")
+            super().append_display_data(HTML("<hr>"))
