@@ -8,7 +8,8 @@ from models.violation import ViolationData
 from models.expectation import ExpectationData
 from models.expectation_revision import ExpectationRevisionData
 from models.chatbot_response import ChatbotResponseData
-from typing import Dict, Type, Any
+from typing import Dict, Type, Any, List
+from datetime import datetime
 
 COLLECTION_DATA_CLASS_MAP: Dict[str, Type] = {
     'users': UserData,
@@ -128,3 +129,28 @@ def delete_model(collection_name: str, model_id: ObjectId, client: MongoClient) 
         return query_result.deleted_count
     except Exception as e:
         raise errors.PyMongoError(str(e))
+
+
+def get_chat_history(conversation_id: ObjectId, client: MongoClient) -> List[Dict[str, str]]:
+    db = client[os.getenv("DATABASE")]
+
+    # Define the query to retrieve ChatMessages and ChatbotResponses for the given conversation_id
+    query = {'conversation_id': conversation_id}
+
+    # Retrieve ChatMessages and ChatbotResponses from the database
+    chat_messages = db['chat_messages'].find(query)
+    chatbot_responses = db['chatbot_responses'].find(query)
+
+    combined_items = list(chat_messages) + list(chatbot_responses)
+
+    # Combine messages and responses into a single list
+    chat_history = []
+
+    for item in combined_items:
+        chat_history.append(item)
+
+    # Sort the chat_history based on the created_at field
+    chat_history.sort(key=lambda x: x['created_at'])
+
+    return chat_history
+
