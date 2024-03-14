@@ -78,7 +78,7 @@ def get_model(collection_name: str, model_id: ObjectId, client: MongoClient) -> 
 
         return {
             '_id': document_id,
-            'model': cast_model
+            **document
         }
     except Exception as e:
         raise errors.PyMongoError(str(e))
