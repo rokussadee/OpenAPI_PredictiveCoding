@@ -1,0 +1,2 @@
+Improve on each of these possibilities, simply by asking yourself the question; "Is this a realistic possibility, knowing the speaker's personality traits and stable facts? Let's revise each of these possibilities and if necessary improve them using the known facts about his their personality." Explicitly verbalize these improved versions of the user inputs in your response.
+Make use of the following user facts for this:
