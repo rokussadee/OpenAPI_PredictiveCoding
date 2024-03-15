@@ -72,6 +72,8 @@ Follow these steps to set up and run the project:
 5. Run Notebook:
    - Open the provided Jupyter notebook in your web browser.
    - Run all cells in the notebook to execute the project code and view the results.
+   - Take a look at the `DEBUG_MODE` environment variable; if set to 'true', debug print statements are appended to the output. 
+   - Running all cells will start the conversation loop, after which user input can be submitted.
 
 ## Project Structure
 
